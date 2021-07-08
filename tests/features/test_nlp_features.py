@@ -77,7 +77,7 @@ def test_sentiment_feature(tokens_series):
     assert df.columns.tolist() == ['text', 'polarity', 'subjectivity']
 
 def test_topics_decompose(tokens_series):
-    model, feature_names = nlp_feat.topics_decompose(tokens_series, nlp_feat.TruncatedSVD)
+    _, model, feature_names = nlp_feat.topics_decompose(tokens_series, nlp_feat.TruncatedSVD)
     assert model.components_.shape[0] == min(10, tokens_series.shape[0])
     assert model.components_.shape[1] == len(feature_names)
 
