@@ -5,7 +5,20 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 
+class FeatureSelector(BaseEstimator, TransformerMixin):
+    """Sklearn transformer object to select certain columns
+    """
+    def __init__(self, feature_names):
+        self.feature_names = feature_names
+        
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X, y=None):
+        return X[self.feature_names]
 
+    def get_feature_names(self):
+        return self.feature_names
 
 class zero_imputer(BaseEstimator, TransformerMixin):
     def __init__(self):

@@ -6,19 +6,147 @@
     <title>Prediction</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div>
+                  {{ message }}
+                </div>
+              {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div>
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <fieldset>
+                <legend>House Location</legend>
                 <div>
                     {{ form.latitude.label }}
                     {{ form.latitude }}
                 </div>
                 <div>
-                    {{ form.longtitude.label }}
-                    {{ form.longtitude }}
+                    {{ form.longitude.label }}
+                    {{ form.longitude }}
                 </div>
-
+                <div>
+                    {{ form.neighbourhood_cleansed.label }}
+                    {{ form.neighbourhood_cleansed }}
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Easy of Booking</legend>
+                <div>
+                    {{ form.host_response_time.label }}
+                    {{ form.host_response_time }}
+                </div>
+                <div>
+                    {{ form.instant_bookable.label }}
+                    {{ form.instant_bookable }}
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Host Credibility</legend>
+                <div>
+                    {{ form.host_is_superhost.label }}
+                    {{ form.host_is_superhost }}
+                </div>
+                <div>
+                    {{ form.host_listings_count.label }}
+                    {{ form.host_listings_count }}
+                </div>
+                <div>
+                    {{ form.host_identity_verified.label }}
+                    {{ form.host_identity_verified }}
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>House Fundamentals</legend>
+                <div>
+                    {{ form.room_type.label }}
+                    {{ form.room_type }}
+                </div>
+                <div>
+                    {{ form.accommodates.label }}
+                    {{ form.accommodates }}
+                </div>
+                <div>
+                    {{ form.bathrooms.label }}
+                    {{ form.bathrooms }}
+                </div>
+                <div>
+                    {{ form.bedrooms.label }}
+                    {{ form.bedrooms }}
+                </div>
+                <div>
+                    {{ form.beds.label }}
+                    {{ form.beds }}
+                </div>
+                <div>
+                    {{ form.amenities.label }}
+                    {{ form.amenities }}
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Booking Flexibility</legend>
+                <div>
+                    {{ form.minimum_nights.label }}
+                    {{ form.minimum_nights }}
+                </div>               
+                <div>
+                    {{ form.guests_included.label }}
+                    {{ form.guests_included }}
+                </div>               
+                <div>
+                    {{ form.cleaning_fee.label }}
+                    {{ form.cleaning_fee }}
+                </div>               
+                <div>
+                    {{ form.extra_people.label }}
+                    {{ form.extra_people }}
+                </div>               
+                <div>
+                    {{ form.cancellation_policy.label }}
+                    {{ form.cancellation_policy }}
+                </div>               
+            </fieldset>
+            <fieldset>
+                <legend>Reviews</legend>
+                <div>
+                    {{ form.number_of_reviews.label }}
+                    {{ form.number_of_reviews }}
+                </div>               
+                <div>
+                    {{ form.number_of_reviews_ltm.label }}
+                    {{ form.number_of_reviews_ltm }}
+                </div>               
+                <div>
+                    {{ form.review_scores_rating.label }}
+                    {{ form.review_scores_rating }}
+                </div>               
+                <div>
+                    {{ form.review_scores_accuracy.label }}
+                    {{ form.review_scores_accuracy }}
+                </div>               
+                <div>
+                    {{ form.review_scores_cleanliness.label }}
+                    {{ form.review_scores_cleanliness }}
+                </div>               
+                <div>
+                    {{ form.review_scores_checkin.label }}
+                    {{ form.review_scores_checkin }}
+                </div>               
+                <div>
+                    {{ form.review_scores_communication.label }}
+                    {{ form.review_scores_communication }}
+                </div>               
+                <div>
+                    {{ form.review_scores_location.label }}
+                    {{ form.review_scores_location }}
+                </div>               
+                <div>
+                    {{ form.review_scores_value.label }}
+                    {{ form.review_scores_value }}
+                </div>               
             </fieldset>
             <div>
                 {{ form.submit }}

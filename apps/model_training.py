@@ -50,10 +50,10 @@ def model_tuning(target, model, params=None):
 if __name__ == '__main__':
     # save_train_test('revenue_30')
     params = {
-        'rf_reg__criterion': ['mse', 'mae'],
-        'rf_reg__max_depth': [4, 6, 8, 10],
+        'rf_reg__criterion': ['mse'],
+        'rf_reg__max_depth': [8, 10],
         'rf_reg__max_features': [0.33, 0.5, 0.8]
     }
     # model_tuning('revenue_30', rf_pipe, params=params)
     rf_model = model_tuning('price', rf_pipe, params=params)
-    save_model('rf', rf_model)
+    save_model('rf_price', rf_model)

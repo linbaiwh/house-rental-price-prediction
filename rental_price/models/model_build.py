@@ -42,6 +42,15 @@ features_trf = ColumnTransformer([
 ], n_jobs=-1, sparse_threshold=0
 )
 
+features_to_keep = [
+    'latitude', 'longitude', 'neighbourhood_cleansed', 
+    'host_response_time', 'instant_bookable', 'host_is_superhost','host_listings_count','host_identity_verified',
+    'room_type', 'accommodates', 'bathrooms', 'bedrooms', 'beds', 'amenities', 
+    'minimum_nights', 'guests_included', 'cleaning_fee', 'extra_people', 'cancellation_policy',
+    'number_of_reviews', 'number_of_reviews_ltm', 'review_scores_rating', 'review_scores_accuracy',
+    'review_scores_cleanliness', 'review_scores_checkin', 'review_scores_communication',
+    'review_scores_location', 'review_scores_value'
+]
 
 def get_col_feature_names(columntransformer):
     feature_names = []
@@ -63,11 +72,10 @@ def get_col_feature_names(columntransformer):
 
 
 class model_eval():
-    def __init__(self, data, target):
+    def __init__(self, data, target, X_cols=features_to_keep):
         self.data = data
         self.target = target
-        self.X_cols = data.columns.tolist()
-        self.X_cols.remove(target)
+        self.X_cols = X_cols
         self.model = None
 
     def gen_train_test_set(self, test_size=0.2):
