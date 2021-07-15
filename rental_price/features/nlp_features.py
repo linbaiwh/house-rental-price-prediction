@@ -267,3 +267,17 @@ def topics_transformer(tokens_series, model, topics_list):
     df = pd.DataFrame(transformed, columns=topics_list)
     df['texts'] = tokens_series
     return df
+
+
+# amenities
+
+def amenities_sum(df):
+    amenities_vocab = [
+        'kitchen', 'parking', 'alarm', 'hair dryer', 'iron',
+        'coffee maker', 'fire extinguisher', 'crib', 'first aid', 'washer',
+        'fireplace'
+    ]
+    amenity_vect = CountVectorizer(ngram_range=(1, 2), vocabulary=amenities_vocab, binary=True)
+    amenities = amenity_vect.fit_transform(df['amenities'])
+    return pd.DataFrame(amenities.todense(), columns=amenities_vocab)
+

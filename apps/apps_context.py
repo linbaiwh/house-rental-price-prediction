@@ -17,6 +17,14 @@ def read_review(processed=False, **readkwargs):
 
     return pd.read_csv(raw_data_folder / 'reviews.csv', **readkwargs)
 
+def read_listing(processed=True, **readkwargs):
+    if processed:
+        return pd.read_csv(processed_folder / 'listing_detail.csv', **readkwargs )
+    
+    return pd.read_csv(
+        raw_data_folder / 'New York City Airbnb Data_detailed listings_07072020.csv', 
+        **readkwargs)
+
 def save_to_feature(file_name, df=None, pic=None, **savekwargs):
     if df is not None:
         df.to_csv(feature_folder / f'{file_name}.csv', index=False, **savekwargs)
@@ -24,7 +32,7 @@ def save_to_feature(file_name, df=None, pic=None, **savekwargs):
         pic.savefig(feature_folder / f'{file_name}.png')
 
 def save_to_processed(file_name, df, **savekwargs):
-    df.to_csv(processed_folder / f'{file_name}.csv', index=True, **savekwargs)
+    df.to_csv(processed_folder / f'{file_name}.csv', **savekwargs)
 
 def save_model(file_name, model):
     joblib.dump(model, model_folder / f'{file_name}.joblib')
