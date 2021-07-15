@@ -68,7 +68,7 @@ def get_col_feature_names(columntransformer):
             feature_names += feature_name
         elif trf == 'passthrough':
             feature_names.append(col)
-        return feature_names
+    return feature_names
 
 
 class model_eval():
