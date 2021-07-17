@@ -184,3 +184,20 @@ rf_pipe = Pipeline([
     ('features_trf', features_trf),
     ('rf_reg', RandomForestRegressor(n_jobs=-1))
 ])
+
+def plot_feature_importance(regressor, trf):
+    try:
+        feature_importance = regressor.feature_importances_
+    except:
+        print('Cannot generate feature importances from the regressor')
+        return
+    else:
+        feature_names = get_col_feature_names(trf)
+        feat_imp = pd.Series(feature_importance, index=feature_names).nlargest(10).sort_values(ascending=True)
+        feat_imp.plot(kind='barh', figsize=(45, 20))
+        plt.xticks(rotation=0, fontsize=25)
+        plt.yticks(rotation=0, fontsize=35)
+        plt.title('Feature Importance', fontsize=60)
+        plt.subplots_adjust(top=0.90, bottom=0.05, left=0.2)
+        fig = plt.gcf()
+        return fig

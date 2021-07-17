@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-from apps_context import read_listing, save_to_feature, save_model
-from rental_price.models.model_build import train_test_split, features_trf, get_col_feature_names, model_eval, rf_pipe, plot_search_results
+from apps_context import read_listing, save_to_feature, save_model, read_model
+from rental_price.models.model_build import train_test_split, features_trf, get_col_feature_names, model_eval, rf_pipe, plot_search_results, plot_feature_importance
 
 def save_train_test(target, model=features_trf):
     df = read_listing()
@@ -44,8 +44,16 @@ def model_tuning(target, model, params=None):
     print(scores)
     return train.model
 
+def rf_feature_importance():
+    rf_model = read_model('rf_price')
+    regressor = rf_model.named_steps.rf_reg
+    trf = rf_model.named_steps.features_trf
+    fig = plot_feature_importance(regressor, trf)
+    if fig is not None:
+        save_to_feature('feature_importance', pic=fig)
+
 if __name__ == '__main__':
-    save_train_test('price')
+    # save_train_test('price')
     # params = {
     #     'rf_reg__criterion': ['mse'],
     #     'rf_reg__max_depth': [8, 10],
@@ -54,3 +62,4 @@ if __name__ == '__main__':
     # model_tuning('revenue_30', rf_pipe, params=params)
     # rf_model = model_tuning('price', rf_pipe, params=params)
     # save_model('rf_price', rf_model)
+    rf_feature_importance()
